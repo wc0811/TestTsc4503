@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
         TscPrinterStrListBean tItem = null;
         tItem = new TscPrinterStrListBean();
         try {
-            tItem.setStrMsg(new String("客户".getBytes("UTF-8"),"gb2312"));
+            tItem.setStrMsg(new String("客户".getBytes("UTF-8"), "gb2312"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -330,21 +330,26 @@ public class MainActivity extends Activity {
     }
 
     private static void printTsc4503(final String content, final String pStrPringtIp, final int pIPringtPoint) {
+        byte[] bytes = null;
+        try {
+            bytes = content.getBytes("gb2312");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        final byte[] finalBytes = bytes;
         new Thread() {
             @Override
             public void run() {
                 super.run();
                 Socket socket = null;
                 OutputStream os = null;
-                PrintWriter pw = null;
                 try {
                     socket = new Socket(pStrPringtIp, pIPringtPoint);
                     os = socket.getOutputStream();
-                    pw = new PrintWriter(os);
-                    pw.write(content);
-                    pw.flush();
+                    os.write(finalBytes);
+                    os.flush();
                     socket.shutdownOutput();
-                    pw.close();
+                    os.close();
                     os.close();
                     socket.close();
                 } catch (IOException e) {
