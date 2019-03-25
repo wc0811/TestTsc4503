@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
         StringBuilder strBld = new StringBuilder();
 
         for (TscPrinterBean item : pList) {
-            strBld.append("SIZE 69.10 mm, 40 mm\n" +
+            strBld.append("SIZE 75 mm, 40 mm\n" +
                     "GAP 3 mm, 0 mm\n" +
                     "DIRECTION 1,0\n" +
                     "REFERENCE 0,0\n" +
@@ -92,13 +92,21 @@ public class MainActivity extends Activity {
 
             strBld.append("QRCODE ")
                     .append(item.getStrQRPosX()).append(",")
-                    .append(item.getStrQRPosX()).append(",L,6,A,180,M2,S7,\"")
+                    .append(item.getStrQRPosY()).append(",L,10,A,180,M2,S7,\"")
                     .append(item.getStrQRMsg()).append("\"\n");
             for (TscPrinterStrListBean tItem : item.getListStr()) {
-                strBld.append("TEXT ").append(tItem.getStrMsgPosX()).append(",")
-                        .append(tItem.getStrMsgPosY()).append(",\"Font001\",0,")
-                        .append(tItem.getStrMsgX()).append(",").append(tItem.getStrMsgY()).append(",\"")
-                        .append(tItem.getStrMsg()).append("\"\n");
+                if (tItem.isNotChinese()) {
+                    strBld.append("TEXT ").append(tItem.getStrMsgPosX()).append(",")
+                            .append(tItem.getStrMsgPosY()).append(",\"3\",0,")
+                            .append(tItem.getStrMsgX()).append(",").append(tItem.getStrMsgY()).append(",\"")
+                            .append(tItem.getStrMsg()).append("\"\n");
+
+                } else {
+                    strBld.append("TEXT ").append(tItem.getStrMsgPosX()).append(",")
+                            .append(tItem.getStrMsgPosY()).append(",\"Font001\",0,")
+                            .append(tItem.getStrMsgX()).append(",").append(tItem.getStrMsgY()).append(",\"")
+                            .append(tItem.getStrMsg()).append("\"\n");
+                }
             }
             strBld.append("PRINT 1,1\n");
         }
@@ -110,7 +118,7 @@ public class MainActivity extends Activity {
         List<TscPrinterBean> listTemp = new ArrayList<>();
         for (String tItem : pList) {
             TscPrinterBean itemBean = new TscPrinterBean();
-            itemBean.setStrQRPosX("170");
+            itemBean.setStrQRPosX("215");
             itemBean.setStrQRPosY("320");
             itemBean.setStrQRMsg("691001002900910");
             itemBean.setListStr(getListStrMsg());
@@ -124,23 +132,23 @@ public class MainActivity extends Activity {
         TscPrinterStrListBean tItem = null;
         tItem = new TscPrinterStrListBean();
         tItem.setStrMsg("客户");
-        tItem.setStrMsgPosX("190");
+        tItem.setStrMsgPosX("225");
         tItem.setStrMsgPosY("50");
-        tItem.setStrMsgX("4");
+        tItem.setStrMsgX("3");
         tItem.setStrMsgY("4");
         listTemp.add(tItem);
         tItem = new TscPrinterStrListBean();
         tItem.setStrMsg(String.format("%s", "商品名称"));
-        tItem.setStrMsgPosX("190");
+        tItem.setStrMsgPosX("225");
         tItem.setStrMsgPosY("140");
-        tItem.setStrMsgX("4");
+        tItem.setStrMsgX("3");
         tItem.setStrMsgY("4");
         listTemp.add(tItem);
         tItem = new TscPrinterStrListBean();
         tItem.setStrMsg(String.format("%s", "商品国际码"));
-        tItem.setStrMsgPosX("190");
+        tItem.setStrMsgPosX("225");
         tItem.setStrMsgPosY("230");
-        tItem.setStrMsgX("4");
+        tItem.setStrMsgX("3");
         tItem.setStrMsgY("4");
         listTemp.add(tItem);
 //        tItem = new TscPrinterStrListBean();
@@ -151,26 +159,28 @@ public class MainActivity extends Activity {
 //        tItem.setStrMsgY("35");
 //        listTemp.add(tItem);
         tItem = new TscPrinterStrListBean();
-        tItem.setStrMsg("商品货位");
-        tItem.setStrMsgPosX("190");
+        tItem.setStrMsg("180101");
+        tItem.setStrMsgPosX("225");
         tItem.setStrMsgPosY("330");
-        tItem.setStrMsgX("5");
-        tItem.setStrMsgY("5");
+        tItem.setStrMsgX("2");
+        tItem.setStrMsgY("4");
+        tItem.setNotChinese(true);
         listTemp.add(tItem);
         tItem = new TscPrinterStrListBean();
         tItem.setStrMsg(String.format("%s%s", "数量", "单位"));
-        tItem.setStrMsgPosX("395");
+        tItem.setStrMsgPosX("450");
         tItem.setStrMsgPosY("330");
-        tItem.setStrMsgX("4");
+        tItem.setStrMsgX("3");
         tItem.setStrMsgY("4");
         listTemp.add(tItem);
         tItem = new TscPrinterStrListBean();
-        tItem.setStrMsg("当前打印序号");
-//        tItem.setStrMsg("2/300");
-        tItem.setStrMsgPosX("10");
-        tItem.setStrMsgPosY("330");
-        tItem.setStrMsgX("6");
-        tItem.setStrMsgY("6");
+//        tItem.setStrMsg("当前打印序号");
+        tItem.setStrMsg("2/30");
+        tItem.setStrMsgPosX("35");
+        tItem.setStrMsgPosY("370");
+        tItem.setStrMsgX("1");
+        tItem.setStrMsgY("3");
+        tItem.setNotChinese(true);
         listTemp.add(tItem);
         return listTemp;
     }

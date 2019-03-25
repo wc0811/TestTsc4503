@@ -9,6 +9,7 @@ public class TscPrinterStrListBean implements Serializable {
     private String strMsgY;
     private String strMsgPosX;
     private String strMsgPosY;
+    private boolean isNotChinese;
 
     public String getStrMsg() {
         return strMsg;
@@ -48,5 +49,13 @@ public class TscPrinterStrListBean implements Serializable {
 
     public void setStrMsgPosY(String strMsgPosY) {
         this.strMsgPosY = strMsgPosY;
+    }
+
+    public boolean isNotChinese() {
+        return isNotChinese;
+    }
+
+    public void setNotChinese(boolean notChinese) {
+        isNotChinese = notChinese;
     }
 }

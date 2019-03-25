@@ -9,6 +9,7 @@ public class TscPrinterBean implements Serializable {
     private String strQRPosY;
     private String strQRZoom1;
     private String strQRZoom2;
+
     private List<TscPrinterStrListBean> listStr;
 
     public String getStrQRMsg() {
@@ -59,4 +60,6 @@ public class TscPrinterBean implements Serializable {
     public void setListStr(List<TscPrinterStrListBean> listStr) {
         this.listStr = listStr;
     }
+
+
 }
