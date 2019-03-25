@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -124,23 +123,14 @@ public class MainActivity extends Activity {
         List<TscPrinterStrListBean> listTemp = new ArrayList<>();
         TscPrinterStrListBean tItem = null;
         tItem = new TscPrinterStrListBean();
-        try {
-            tItem.setStrMsg(new String("客户".getBytes("UTF-8"), "gb2312"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        tItem.setStrMsg("客户");
         tItem.setStrMsgPosX("190");
         tItem.setStrMsgPosY("50");
         tItem.setStrMsgX("4");
         tItem.setStrMsgY("4");
         listTemp.add(tItem);
         tItem = new TscPrinterStrListBean();
-//        tItem.setStrMsg(String.format("%s", "商品名称"));
-        try {
-            tItem.setStrMsg(new String("商品名称".getBytes("utf-8")));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        tItem.setStrMsg(String.format("%s", "商品名称"));
         tItem.setStrMsgPosX("190");
         tItem.setStrMsgPosY("140");
         tItem.setStrMsgX("4");
@@ -234,85 +224,7 @@ public class MainActivity extends Activity {
             result.setMessage("打印机准备就绪");
             result.setCanUse(true);
             isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 1) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("打印头开启!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 2) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("纸张卡纸!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 3) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("打印头开启并且纸张卡纸!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 4) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("纸张缺纸!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 5) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("打印头开启并且纸张缺纸!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 8) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("无碳带!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 9) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("打印头开启并且无碳带!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 10) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("纸张卡纸并且无碳带!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 11) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("打印头开启、纸张卡纸并且无碳带!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 12) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("纸张缺纸并且无碳带!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 13) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("打印头开启、纸张缺纸并且无碳带!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 16) {
-            colseSocket(socket);
-            result.setCode(0);
-            result.setMessage("打印机暂停!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 32) {
-            colseSocket(socket);
-            result.setCode(1);
-            result.setMessage("打印中!");
-            result.setCanUse(false);
-            isCanPrint.isCanPrint(result);
-        } else if (readBuf[0] == 128) {
+        } else {
             colseSocket(socket);
             result.setCode(0);
             result.setMessage("打印机发生错误!");
