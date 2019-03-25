@@ -28,8 +28,8 @@ public class MainActivity extends Activity {
         test = findViewById(R.id.button1);
         final List<String> lsitTest = new ArrayList<>();
         lsitTest.add("1");
-        lsitTest.add("1");
-        lsitTest.add("1");
+//        lsitTest.add("1");
+//        lsitTest.add("1");
         printOutBoxZsc4503(lsitTest);
 
         test.setOnClickListener(new OnClickListener() {
