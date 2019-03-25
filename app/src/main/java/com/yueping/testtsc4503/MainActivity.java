@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -47,9 +48,9 @@ public class MainActivity extends Activity {
 
     public static void testprint(String pStrMsg) {
         Log.v("EAWSD", pStrMsg);
-//        final String strPringtIp = "172.28.5.67";
-//        final int iPringtPoint = 9100;
-//        realPrint(pStrMsg, strPringtIp, iPringtPoint);
+        final String strPringtIp = "172.28.5.67";
+        final int iPringtPoint = 9100;
+        printTsc4503(pStrMsg, strPringtIp, iPringtPoint);
     }
 
     private static void realPrint(final String pStrContent, final String pStrPringtIp, final int pIPringtPoint) {
@@ -123,14 +124,23 @@ public class MainActivity extends Activity {
         List<TscPrinterStrListBean> listTemp = new ArrayList<>();
         TscPrinterStrListBean tItem = null;
         tItem = new TscPrinterStrListBean();
-        tItem.setStrMsg(String.format("%s", ("客户")));
+        try {
+            tItem.setStrMsg(new String("客户".getBytes("UTF-8"),"gb2312"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         tItem.setStrMsgPosX("190");
         tItem.setStrMsgPosY("50");
         tItem.setStrMsgX("4");
         tItem.setStrMsgY("4");
         listTemp.add(tItem);
         tItem = new TscPrinterStrListBean();
-        tItem.setStrMsg(String.format("%s", "商品名称"));
+//        tItem.setStrMsg(String.format("%s", "商品名称"));
+        try {
+            tItem.setStrMsg(new String("商品名称".getBytes("utf-8")));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         tItem.setStrMsgPosX("190");
         tItem.setStrMsgPosY("140");
         tItem.setStrMsgX("4");
